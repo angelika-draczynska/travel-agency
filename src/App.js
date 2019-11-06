@@ -43,11 +43,15 @@ class App extends React.Component {
       <BrowserRouter>
         <MainLayout>
           <AnimatedSwitch
-            atEnter={{ opacity: 0 }}
-            atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
+            atEnter={{ translateY: 200, opacity: 0 }}
+            atLeave={{ translateY: 200, opacity: 0 }}
+            atActive={{ translateY: 0, opacity: 1 }}
             className={styles.switchWrapper}
-            location={location}> 
+            location={location}
+            mapStyles={styles => ({
+              transform: `translateY(${styles.translateY}%)`,
+              opacity: styles.opacity,
+            })}> 
             <Route exact path='/' component={Home} />
             <Route exact path='/trips' component={Trips} />
             <Route exact path='/trip/:id' component={Trip} />

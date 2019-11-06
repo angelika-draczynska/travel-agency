@@ -13,14 +13,21 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   // TODO - filter by duration
 
-  console.log('output', output);
-  console.log(filters.tags);
   // TODO - filter by tags
-  if(filters.tags.length){
-    return output.filter(trip => {
-      filters.tags === trip.tags[0];
-
+  if (filters.tags.length) {
+    const filtered = [];
+    output.forEach(trip => {
+      let matches = true;
+      filters.tags.forEach(tag => {
+        if (!trip.tags.includes(tag)) {
+          matches = false;
+        }
+      });
+      if (matches) {
+        filtered.push(trip);
+      }
     });
+    return filtered;
   }
 
   // TODO - sort by cost descending (most expensive goes first)
