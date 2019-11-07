@@ -26,81 +26,80 @@ const Trip = ({
   intro,
 }) => {
   if (error) return <NotFound />;
-  else
-    return (
-      <Section>
-        <Grid>
-          <PageTitle text={name} />
-        </Grid>
-        <DetailsBox>
-          <DetailsImage>
-            <SideImage source={image} />
-          </DetailsImage>
-          <Grid>
-            <Row>
-              <Col md={12} lg={4}>
-                <div className={styles.intro}>{HTMLParser(intro)}</div>
-                <List variant='light'>
-                  <ListItem
-                    title={`<strong>Duration:</strong> ${days} days`}
-                    icon='calendar-alt'
-                  />
-                  <ListItem
-                    title={`<strong>Price:</strong> from ${cost}`}
-                    icon='money-bill-wave'
-                  />
-                </List>
-              </Col>
-            </Row>
-          </Grid>
-        </DetailsBox>
+  return (
+    <Section>
+      <Grid>
+        <PageTitle text={name} />
+      </Grid>
+      <DetailsBox>
+        <DetailsImage>
+          <SideImage source={image} />
+        </DetailsImage>
         <Grid>
           <Row>
-            <Col xs={12}>
-              <PageTitle text='Trip details' />
-              {HTMLParser(description)}
+            <Col md={12} lg={4}>
+              <div className={styles.intro}>{HTMLParser(intro)}</div>
+              <List variant='light'>
+                <ListItem
+                  title={`<strong>Duration:</strong> ${days} days`}
+                  icon='calendar-alt'
+                />
+                <ListItem
+                  title={`<strong>Price:</strong> from ${cost}`}
+                  icon='money-bill-wave'
+                />
+              </List>
             </Col>
           </Row>
         </Grid>
-        <Grid>
-          <PageTitle text={`About ${country.name}`} />
-        </Grid>
-        <DetailsBox>
-          <DetailsImage>
-            <SideImage source={country.flag} />
-          </DetailsImage>
-          <Grid>
-            <Row>
-              <Col md={12} lg={4}>
-                <List variant='light'>
-                  <ListItem
-                    title={`<strong>Capital:</strong> ${country.capital}`}
-                    icon='city'
-                  />
-                  <ListItem
-                    title={`<strong>Population:</strong> ${country.population /
-                      1000000} millions`}
-                    icon='users'
-                  />
-                  <ListItem
-                    title={`<strong>Currency:</strong> ${country.currencies[0].symbol} (${country.currencies[0].name})`}
-                    icon='money-bill-wave'
-                  />
-                </List>
-              </Col>
-            </Row>
-          </Grid>
-        </DetailsBox>
+      </DetailsBox>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <PageTitle text='Trip details' />
+            {HTMLParser(description)}
+          </Col>
+        </Row>
+      </Grid>
+      <Grid>
+        <PageTitle text={`About ${country.name}`} />
+      </Grid>
+      <DetailsBox>
+        <DetailsImage>
+          <SideImage source={country.flag} />
+        </DetailsImage>
         <Grid>
           <Row>
-            <Col xs={12}>
-              <PageTitle text='Trip options' />
-              <OrderForm tripCost={cost} />
+            <Col md={12} lg={4}>
+              <List variant='light'>
+                <ListItem
+                  title={`<strong>Capital:</strong> ${country.capital}`}
+                  icon='city'
+                />
+                <ListItem
+                  title={`<strong>Population:</strong> ${country.population /
+                    1000000} millions`}
+                  icon='users'
+                />
+                <ListItem
+                  title={`<strong>Currency:</strong> ${country.currencies[0].symbol} (${country.currencies[0].name})`}
+                  icon='money-bill-wave'
+                />
+              </List>
             </Col>
           </Row>
         </Grid>
-      </Section>
-    );
+      </DetailsBox>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <PageTitle text='Trip options' />
+            <OrderForm tripCost={cost} />
+          </Col>
+        </Row>
+      </Grid>
+    </Section>
+  );
 };
 
 Trip.propTypes = {
@@ -110,6 +109,8 @@ Trip.propTypes = {
   days: PropTypes.number,
   description: PropTypes.string,
   country: PropTypes.object,
+  error: PropTypes.any,
+  intro: PropTypes.any,
 };
 
 export default Trip;

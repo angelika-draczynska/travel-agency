@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AnimatedSwitch} from 'react-router-transition';
+import { AnimatedSwitch } from 'react-router-transition';
 import styles from './styles/App.scss';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
@@ -17,28 +17,28 @@ import Info from './components/views/Info/Info';
 import NotFound from './components/views/NotFound/NotFound';
 
 import parseTrips from './utils/parseTrips';
-import {setMultipleStates} from './redux/globalRedux';
+import { setMultipleStates } from './redux/globalRedux';
 
 class App extends React.Component {
   static propTypes = {
     trips: PropTypes.array,
     setStates: PropTypes.func,
-  }
+  };
 
-  constructor(props){
+  constructor(props) {
     super(props);
     // parse trips when App is first created
     parseTrips(this.props.trips, this.props.setStates);
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.trips != this.props.trips){
+  componentDidUpdate(prevProps) {
+    if (prevProps.trips != this.props.trips) {
       // parse trips again if they changed
       parseTrips(this.props.trips, this.props.setStates);
     }
   }
 
-  render(){
+  render() {
     return (
       <BrowserRouter>
         <MainLayout>
@@ -51,7 +51,8 @@ class App extends React.Component {
             mapStyles={styles => ({
               transform: `translateY(${styles.translateY}%)`,
               opacity: styles.opacity,
-            })}> 
+            })}
+          >
             <Route exact path='/' component={Home} />
             <Route exact path='/trips' component={Trips} />
             <Route exact path='/trip/:id' component={Trip} />
@@ -75,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
   setStates: newState => dispatch(setMultipleStates(newState)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

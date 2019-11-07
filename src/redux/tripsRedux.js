@@ -15,19 +15,7 @@ export const getFilteredTrips = ({trips, filters}) => {
 
   // TODO - filter by tags
   if (filters.tags.length) {
-    const filtered = [];
-    output.forEach(trip => {
-      let matches = true;
-      filters.tags.forEach(tag => {
-        if (!trip.tags.includes(tag)) {
-          matches = false;
-        }
-      });
-      if (matches) {
-        filtered.push(trip);
-      }
-    });
-    return filtered;
+    return output.filter(trip => filters.tags.every(tag => trip.tags.includes(tag)));
   }
 
   // TODO - sort by cost descending (most expensive goes first)
