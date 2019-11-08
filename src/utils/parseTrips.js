@@ -63,7 +63,7 @@ const parseTrips = (trips, setStates) => {
     if (typeof newState.subregions[country.subregion] == 'undefined') {
       newState.subregions[country.subregion] = {
         region: country.region,
-        countries: [country.alpha3Code]
+        countries: [country.alpha3Code],
       };
     } else if (
       newState.subregions[country.subregion].countries.indexOf(
