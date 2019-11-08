@@ -1,8 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { AnimatedSwitch } from 'react-router-transition';
+import styles from './styles/App.scss';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 
@@ -16,32 +17,42 @@ import Info from './components/views/Info/Info';
 import NotFound from './components/views/NotFound/NotFound';
 
 import parseTrips from './utils/parseTrips';
-import {setMultipleStates} from './redux/globalRedux';
+import { setMultipleStates } from './redux/globalRedux';
 
 class App extends React.Component {
   static propTypes = {
     trips: PropTypes.array,
     setStates: PropTypes.func,
-  }
+  };
 
-  constructor(props){
+  constructor(props) {
     super(props);
     // parse trips when App is first created
     parseTrips(this.props.trips, this.props.setStates);
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.trips != this.props.trips){
+  componentDidUpdate(prevProps) {
+    if (prevProps.trips != this.props.trips) {
       // parse trips again if they changed
       parseTrips(this.props.trips, this.props.setStates);
     }
   }
 
-  render(){
+  render() {
     return (
       <BrowserRouter>
         <MainLayout>
-          <Switch location={location}>
+          <AnimatedSwitch
+            atEnter={{ translateY: 200, opacity: 0 }}
+            atLeave={{ translateY: 200, opacity: 0 }}
+            atActive={{ translateY: 0, opacity: 1 }}
+            className={styles.switchWrapper}
+            location={location}
+            mapStyles={styles => ({
+              transform: `translateY(${styles.translateY}%)`,
+              opacity: styles.opacity,
+            })}
+          >
             <Route exact path='/' component={Home} />
             <Route exact path='/trips' component={Trips} />
             <Route exact path='/trip/:id' component={Trip} />
@@ -50,7 +61,7 @@ class App extends React.Component {
             <Route exact path='/regions' component={Regions} />
             <Route exact path='/info' component={Info} />
             <Route path='*' component={NotFound} />
-          </Switch>
+          </AnimatedSwitch>
         </MainLayout>
       </BrowserRouter>
     );
@@ -65,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
   setStates: newState => dispatch(setMultipleStates(newState)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
