@@ -137,7 +137,7 @@ for (let type in optionTypes) {
             .find('input')
             .at(1)
             .simulate('change', { currentTarget: { checked: true } });
-          expect(checkboxes).prop('value').toEqual(testValue);
+          expect(checkboxes.prop('value')).toEqual(testValue);
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({
             [mockProps.id]: [mockProps.currentValue, testValue],
