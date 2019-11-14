@@ -51,3 +51,4 @@ describe('Component TripSummary', () => {
     expect(component.find('.tags')).toBeTruthy();
   });
 });
+
