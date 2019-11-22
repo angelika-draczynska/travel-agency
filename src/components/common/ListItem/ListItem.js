@@ -15,6 +15,7 @@ function ListItem(props) {
 ListItem.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string,
+
 };
 
 export default ListItem;
