@@ -24,6 +24,7 @@ const Trip = ({
   description,
   country,
   intro,
+  id,
 }) => {
   if (error) return <NotFound />;
   return (
@@ -94,7 +95,7 @@ const Trip = ({
         <Row>
           <Col xs={12}>
             <PageTitle text='Trip options' />
-            <OrderForm tripCost={cost} />
+            <OrderForm tripCost={cost} tripId={id} tripName={name} countryCode={country.alpha3Code} />
           </Col>
         </Row>
       </Grid>
@@ -111,6 +112,7 @@ Trip.propTypes = {
   country: PropTypes.object,
   error: PropTypes.any,
   intro: PropTypes.any,
+  id: PropTypes.any,
 };
 
 export default Trip;
